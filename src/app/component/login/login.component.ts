@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/auth.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+  constructor( private auth : AuthService) { }
+  email : string = '';
+  password : string = '';
+
+  ngOnInit(): void {
+  }
+
+  login(){
+    if(this.email==''){
+      alert('please enter email');
+      return;
+    }
+    if(this.password==''){
+      alert('please enter password');
+      return;
+    }
+    this.auth.login(this.email,this.password);
+    this.email='';
+    this.password='';
+  }
+
+  signInWithGoogle(){
+    this.auth.googleSignIn();
+  }
+}
